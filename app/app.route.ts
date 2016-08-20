@@ -12,3 +12,5 @@ const appRoutes: Routes = <Routes>[
         component: HeroComponent
     }
 ];
+
+export const routing = RouterModule.forRoot(appRoutes);
