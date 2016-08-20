@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
 import {Hero} from "./model/hero";
 import {HeroService} from "./services/hero.service";
 import { OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
     providers: [HeroService],
     selector: 'my-hero',
@@ -18,8 +18,6 @@ import { OnInit } from '@angular/core';
              <span class="badge">{{hero.id}}</span> {{hero.name}}
         </li>
     </ul>
-    <my-hero-detail [hero]="selectedHero"></my-hero-detail>
-
     `,
     styles: [`
   .selected {
@@ -75,7 +73,8 @@ import { OnInit } from '@angular/core';
 
 
 export class HeroComponent implements OnInit{
-    constructor(private heroService: HeroService) { }
+    constructor(private heroService: HeroService,
+                private router:Router) { }
     ngOnInit():void {
         this.getHeroes();
     }
@@ -85,7 +84,8 @@ export class HeroComponent implements OnInit{
     heroes: Hero[];
     selectedHero: Hero;
     onSelect(hero: Hero): void {
-        this.selectedHero = hero;
+        let link = ['/detail', hero.id];
+        this.router.navigate(link);
     }
 
 }
